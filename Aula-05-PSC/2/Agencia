@@ -1,0 +1,40 @@
+public class Agencia {
+    // Atributos privados
+    private String nome;
+    private int numero;
+    private int digito;
+
+    // Construtor
+    public Agencia(String nome, int numero, int digito) {
+        if (numero < 0 || numero > 9999) {
+            throw new IllegalArgumentException("Número da agência deve ser positivo e ter no máximo 4 dígitos.");
+        }
+        if (digito < 0 || digito > 9) {
+            throw new IllegalArgumentException("Dígito da agência deve ser um número de 0 a 9.");
+        }
+        this.nome = nome;
+        this.numero = numero;
+        this.digito = digito;
+    }
+
+    // Métodos de acesso (getters)
+    public String getNome() {
+        return nome;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public int getDigito() {
+        return digito;
+    }
+
+    // Métodos modificadores (setters)
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setNumero(int numero) {
+        if (numero < 0 || numero > 9999) {
+            throw new IllegalArgumentException("Número da agência deve ser positivo e 

@@ -1,0 +1,41 @@
+public class CaixaEletronico {
+    public static void main(String[] args) {
+        // Instanciando uma Agência
+        Agencia agencia = new Agencia("Agência Principal", 7890, 5);
+
+        // Instanciando uma Conta Corrente
+        ContaCorrente conta = new ContaCorrente(1234, 4, agencia, 150.00);
+
+        // Instanciando um Cliente
+        Cliente cliente = new Cliente("Ademar Apior", "123231518-12", conta);
+
+        // Operações
+        System.out.println("Dados do Cliente:");
+        System.out.println("Nome: " + cliente.getNome());
+        System.out.println("CPF: " + cliente.getCpf());
+
+        // Sacar 140.0
+        double saque1 = conta.sacar(140.0);
+        System.out.println("\nSaque de 140.0: " + (saque1 > 0 ? "Sucesso" : "Falha"));
+
+        // Consultar saldo
+        double saldo1 = conta.consultarSaldo();
+        System.out.printf("Saldo após saque: %.2f\n", saldo1);
+
+        // Tentar sacar 200.0
+        double saque2 = conta.sacar(200.0);
+        System.out.println("Saque de 200.0: " + (saque2 > 0 ? "Sucesso" : "Falha"));
+
+        // Consultar saldo novamente
+        double saldo2 = conta.consultarSaldo();
+        System.out.printf("Saldo após tentativa de saque: %.2f\n", saldo2);
+
+        // Depositar 25.45
+        conta.depositar(25.45);
+        System.out.println("Depósito de 25.45 realizado com sucesso.");
+
+        // Imprimir saldo
+        System.out.println("\nDados da Conta:");
+        conta.imprimirSaldo(); // Imprime os dados da conta
+    }
+}

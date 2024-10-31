@@ -1,0 +1,97 @@
+public class ContaCorrente {
+    // Atributos privados
+    private int numero;
+    private int digito;
+    private Agencia agencia; // Supondo que a classe Agencia já está definida
+    private double saldo;
+
+    // Construtor
+    public ContaCorrente(int numero, int agenciaNumero, double saldo) {
+        if (numero < 0 || numero > 9999) {
+            throw new IllegalArgumentException("Número da conta deve ser positivo e ter no máximo 4 dígitos.");
+        }
+
+        this.numero = numero;
+        this.digito = calcularDigito(numero);
+        this.agencia = new Agencia(agenciaNumero); // Supondo que a classe Agencia possui este construtor
+        this.saldo = saldo;
+    }
+
+    // Método para calcular o dígito
+    private int calcularDigito(int numero) {
+        String numeroStr = String.format("%04d", numero); // Garante que o número tenha 4 dígitos
+        int soma = 0;
+
+        // Multiplicação conforme a regra do módulo 11
+        soma += Character.getNumericValue(numeroStr.charAt(0)) * 4;
+        soma += Character.getNumericValue(numeroStr.charAt(1)) * 6;
+        soma += Character.getNumericValue(numeroStr.charAt(2)) * 8;
+        soma += Character.getNumericValue(numeroStr.charAt(3)) * 2;
+
+        int digito = soma % 11;
+        return (digito == 10) ? 0 : digito; // Se o resultado for 10, o dígito é 0
+    }
+
+    // Métodos de acesso (getters)
+    public int getNumero() {
+        return numero;
+    }
+
+    public int getDigito() {
+        return digito;
+    }
+
+    public Agencia getAgencia() {
+        return agencia;
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    // Métodos modificadores (setters)
+    public void setNumero(int numero) {
+        if (numero < 0 || numero > 9999) {
+            throw new IllegalArgumentException("Número da conta deve ser positivo e ter no máximo 4 dígitos.");
+        }
+        this.numero = numero;
+        this.digito = calcularDigito(numero); // Recalcula o dígito
+    }
+
+    public void setAgencia(Agencia agencia) {
+        this.agencia = agencia;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+
+    // Método para depositar
+    public void depositar(double valor) {
+        if (valor > 0) {
+            saldo += valor;
+        }
+    }
+
+    // Método para sacar
+    public double sacar(double valor) {
+        if (valor > saldo) {
+            System.out.println("Saque não efetuado. Saldo insuficiente.");
+            return 0;
+        } else {
+            saldo -= valor;
+            return valor;
+        }
+    }
+
+    // Método para consultar saldo
+    public double consultarSaldo() {
+        return saldo;
+    }
+
+    // Método para imprimir saldo
+    public void imprimirSaldo() {
+        System.out.printf("Conta Corrente: %d-%d\nAgência: %d\nSaldo: %.2f\n", 
+                          numero, digito, agencia.getNumero(), saldo);
+    }
+}

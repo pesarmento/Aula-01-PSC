@@ -1,0 +1,21 @@
+public class Usuario {
+    public static void main(String[] args) {
+        // Instanciar o condicionador de ar
+        CondicionadorDeAr condicionador = new CondicionadorDeAr();
+
+        // Tentar aumentar a temperatura para 30 graus
+        System.out.println("Tentando aumentar a temperatura para 30 graus...");
+        condicionador.getTermostato().setTemperatura(30); // Deve mostrar mensagem de erro
+
+        // Tentar reduzir a temperatura para 10 graus
+        System.out.println("Tentando reduzir a temperatura para 10 graus...");
+        condicionador.getTermostato().setTemperatura(10); // Deve mostrar mensagem de erro
+
+        // Aumentar a temperatura para 25 graus
+        System.out.println("Aumentando a temperatura para 25 graus...");
+        condicionador.getTermostato().setTemperatura(25); // Alteração válida
+
+        // Imprimir a temperatura atual
+        System.out.println("Temperatura atual: " + condicionador.getTermostato().getTemperatura() + "°C");
+    }
+}
