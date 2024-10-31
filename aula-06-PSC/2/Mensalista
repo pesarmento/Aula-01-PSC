@@ -1,0 +1,13 @@
+public class Mensalista extends Empregado {
+    // Construtor sem parâmetros
+    public Mensalista() {
+        super(); // Chama o construtor da classe pai (Empregado)
+    }
+
+    // Construtor com parâmetros
+    public Mensalista(String nome, String sobrenome, String cpf, double salario) {
+        super(nome, sobrenome, cpf, salario); // Chama o construtor da classe pai
+    }
+
+    // Pode adicionar métodos ou atributos específicos se necessário
+}

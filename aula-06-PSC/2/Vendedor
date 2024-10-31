@@ -1,0 +1,37 @@
+public class Vendedor extends Empregado {
+    private double comissao;
+    private double vendas;
+
+    // Construtor sem parâmetros
+    public Vendedor() {
+        super();
+        this.comissao = 0.0;
+        this.vendas = 0.0;
+    }
+
+    // Construtor com parâmetros
+    public Vendedor(String nome, String sobrenome, String cpf, double salario, double comissao, double vendas) {
+        super(nome, sobrenome, cpf, salario + (comissao * vendas)); // Salário base + comissões
+        this.comissao = comissao;
+        this.vendas = vendas;
+    }
+
+    // Métodos de acesso e modificadores
+    public double getComissao() {
+        return comissao;
+    }
+
+    public void setComissao(double comissao) {
+        this.comissao = comissao;
+        setSalario(getSalario() - (this.comissao * vendas) + (comissao * vendas)); // Atualiza o salário
+    }
+
+    public double getVendas() {
+        return vendas;
+    }
+
+    public void setVendas(double vendas) {
+        this.vendas = vendas;
+        setSalario(getSalario() - (this.comissao * vendas) + (comissao * vendas)); // Atualiza o salário
+    }
+}

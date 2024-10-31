@@ -1,0 +1,25 @@
+public class Cheque extends Pagamento {
+    private String numeroDoCheque;
+
+    // Construtor sem parâmetros
+    public Cheque() {
+        super(); // Chama o construtor da classe pai (Pagamento)
+        this.numeroDoCheque = "";
+    }
+
+    // Construtor com parâmetros
+    public Cheque(String nomeDoPagador, String cpf, double valorASerPago, String numeroDoCheque) {
+        super(nomeDoPagador, cpf, valorASerPago); // Chama o construtor da classe pai
+        this.numeroDoCheque = numeroDoCheque;
+    }
+
+    // Método de acesso (getter)
+    public String getNumeroDoCheque() {
+        return numeroDoCheque;
+    }
+
+    // Método modificador (setter)
+    public void setNumeroDoCheque(String numeroDoCheque) {
+        this.numeroDoCheque = numeroDoCheque;
+    }
+}

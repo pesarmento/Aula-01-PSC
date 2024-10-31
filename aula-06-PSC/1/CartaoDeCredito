@@ -1,0 +1,25 @@
+public class CartaoDeCredito extends Pagamento {
+    private String numeroDoCartao;
+
+    // Construtor sem parâmetros
+    public CartaoDeCredito() {
+        super(); // Chama o construtor da classe pai (Pagamento)
+        this.numeroDoCartao = "";
+    }
+
+    // Construtor com parâmetros
+    public CartaoDeCredito(String nomeDoPagador, String cpf, double valorASerPago, String numeroDoCartao) {
+        super(nomeDoPagador, cpf, valorASerPago); // Chama o construtor da classe pai
+        this.numeroDoCartao = numeroDoCartao;
+    }
+
+    // Método de acesso (getter)
+    public String getNumeroDoCartao() {
+        return numeroDoCartao;
+    }
+
+    // Método modificador (setter)
+    public void setNumeroDoCartao(String numeroDoCartao) {
+        this.numeroDoCartao = numeroDoCartao;
+    }
+}

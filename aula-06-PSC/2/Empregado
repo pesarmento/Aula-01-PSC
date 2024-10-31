@@ -1,0 +1,30 @@
+public class Empregado extends PessoaFisica {
+    private double salario;
+
+    // Construtor sem parâmetros
+    public Empregado() {
+        super(); // Chama o construtor da classe pai (PessoaFisica)
+        this.salario = 0.0; // Inicializa o salário com 0.0
+    }
+
+    // Construtor com parâmetros
+    public Empregado(String nome, String sobrenome, String cpf, double salario) {
+        super(nome, sobrenome, cpf); // Chama o construtor da classe pai
+        this.salario = salario; // Inicializa o salário
+    }
+
+    // Métodos de acesso (getters e setters)
+    public double getSalario() {
+        return salario;
+    }
+
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
+
+    // Método que retorna os dados em uma String, incluindo o salário
+    @Override
+    public String dados() {
+        return super.dados() + ", Salário: R$ " + salario;
+    }
+}

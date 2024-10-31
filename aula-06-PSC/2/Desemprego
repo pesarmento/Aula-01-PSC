@@ -1,0 +1,40 @@
+public class Desempregado extends PessoaFisica {
+    private double seguroDesemprego;
+
+    // Construtor sem parâmetros
+    public Desempregado() {
+        super(); // Chama o construtor da classe pai (PessoaFisica)
+        this.seguroDesemprego = 0.0; // Inicializa seguroDesemprego com 0.0
+    }
+
+    // Construtor com parâmetros
+    public Desempregado(String nome, String sobrenome, String cpf, double seguroDesemprego) {
+        super(nome, sobrenome, cpf); // Chama o construtor da classe pai
+        this.seguroDesemprego = seguroDesemprego; // Inicializa seguroDesemprego
+    }
+
+    // Métodos de acesso (getter)
+    public double getSeguroDesemprego() {
+        return seguroDesemprego;
+    }
+
+    // Método modificador (setter)
+    public void setSeguroDesemprego(double seguroDesemprego) {
+        this.seguroDesemprego = seguroDesemprego;
+    }
+
+    // Método que retorna os dados em uma String, incluindo o seguro-desemprego
+    @Override
+    public String dados() {
+        return super.dados() + ", Seguro Desemprego: R$ " + seguroDesemprego;
+    }
+
+    // Sobrecarga do método dados() para retornar apenas os atributos próprios
+    public String dados(boolean incluirSegurado) {
+        if (incluirSegurado) {
+            return super.dados() + ", Seguro Desemprego: R$ " + seguroDesemprego;
+        } else {
+            return super.dados() + ", Seguro Desemprego: Informação não disponível.";
+        }
+    }
+}

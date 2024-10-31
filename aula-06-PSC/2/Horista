@@ -1,0 +1,37 @@
+public class Horista extends Empregado {
+    private double valorPorHora;
+    private int horasTrabalhadas;
+
+    // Construtor sem parâmetros
+    public Horista() {
+        super();
+        this.valorPorHora = 0.0;
+        this.horasTrabalhadas = 0;
+    }
+
+    // Construtor com parâmetros
+    public Horista(String nome, String sobrenome, String cpf, double valorPorHora, int horasTrabalhadas) {
+        super(nome, sobrenome, cpf, valorPorHora * horasTrabalhadas); // Salário calculado
+        this.valorPorHora = valorPorHora;
+        this.horasTrabalhadas = horasTrabalhadas;
+    }
+
+    // Métodos de acesso e modificadores
+    public double getValorPorHora() {
+        return valorPorHora;
+    }
+
+    public void setValorPorHora(double valorPorHora) {
+        this.valorPorHora = valorPorHora;
+        setSalario(valorPorHora * horasTrabalhadas); // Atualiza o salário
+    }
+
+    public int getHorasTrabalhadas() {
+        return horasTrabalhadas;
+    }
+
+    public void setHorasTrabalhadas(int horasTrabalhadas) {
+        this.horasTrabalhadas = horasTrabalhadas;
+        setSalario(valorPorHora * horasTrabalhadas); // Atualiza o salário
+    }
+}

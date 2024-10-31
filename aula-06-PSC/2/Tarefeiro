@@ -1,0 +1,37 @@
+public class Tarefeiro extends Empregado {
+    private double pagamentoPorTarefa;
+    private int tarefasConcluidas;
+
+    // Construtor sem parâmetros
+    public Tarefeiro() {
+        super();
+        this.pagamentoPorTarefa = 0.0;
+        this.tarefasConcluidas = 0;
+    }
+
+    // Construtor com parâmetros
+    public Tarefeiro(String nome, String sobrenome, String cpf, double pagamentoPorTarefa, int tarefasConcluidas) {
+        super(nome, sobrenome, cpf, pagamentoPorTarefa * tarefasConcluidas); // Salário calculado
+        this.pagamentoPorTarefa = pagamentoPorTarefa;
+        this.tarefasConcluidas = tarefasConcluidas;
+    }
+
+    // Métodos de acesso e modificadores
+    public double getPagamentoPorTarefa() {
+        return pagamentoPorTarefa;
+    }
+
+    public void setPagamentoPorTarefa(double pagamentoPorTarefa) {
+        this.pagamentoPorTarefa = pagamentoPorTarefa;
+        setSalario(pagamentoPorTarefa * tarefasConcluidas); // Atualiza o salário
+    }
+
+    public int getTarefasConcluidas() {
+        return tarefasConcluidas;
+    }
+
+    public void setTarefasConcluidas(int tarefasConcluidas) {
+        this.tarefasConcluidas = tarefasConcluidas;
+        setSalario(pagamentoPorTarefa * tarefasConcluidas); // Atualiza o salário
+    }
+}
