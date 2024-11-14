@@ -1,0 +1,100 @@
+import javax.swing.*;
+import java.util.ArrayList;
+
+public class Teste {
+
+    public static void main(String[] args) {
+        // Criação do depósito
+        Deposito deposito = new Deposito();
+
+        // Variável para armazenar a opção escolhida no menu
+        int opcao = 0;
+
+        // Loop para exibir o menu enquanto o usuário não escolher a opção de sair
+        while (opcao != 6) {
+            // Exibindo o menu com as opções
+            String menu = "1. Adicionar Caixa\n" +
+                          "2. Remover Caixa\n" +
+                          "3. Procurar Caixa\n" +
+                          "4. Mudar Caixa\n" +
+                          "5. Listar caixas mais pesadas que 10.0kg\n" +
+                          "6. Sair";
+            opcao = Integer.parseInt(JOptionPane.showInputDialog(null, menu, "Menu do Depósito", JOptionPane.INFORMATION_MESSAGE));
+
+            switch (opcao) {
+                case 1:
+                    // Adicionar Caixa
+                    String dono = JOptionPane.showInputDialog("Digite o nome do dono da caixa:");
+                    String corredor = JOptionPane.showInputDialog("Digite o corredor da caixa:");
+                    int posicao = Integer.parseInt(JOptionPane.showInputDialog("Digite a posição da caixa no corredor:"));
+                    double peso = Double.parseDouble(JOptionPane.showInputDialog("Digite o peso da caixa:"));
+
+                    // Criação da nova caixa e adição ao depósito
+                    Caixa novaCaixa = new Caixa(corredor, posicao, peso, dono);
+                    deposito.adicionarCaixa(novaCaixa);
+                    JOptionPane.showMessageDialog(null, "Caixa adicionada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+
+                case 2:
+                    // Remover Caixa
+                    String donoRemover = JOptionPane.showInputDialog("Digite o nome do dono da caixa a ser removida:");
+                    boolean removido = deposito.removerCaixaPorDono(donoRemover);
+                    if (removido) {
+                        JOptionPane.showMessageDialog(null, "Caixa removida com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Caixa não encontrada.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    }
+                    break;
+
+                case 3:
+                    // Procurar Caixa
+                    String donoProcurar = JOptionPane.showInputDialog("Digite o nome do dono da caixa que deseja procurar:");
+                    int posicaoCaixa = deposito.encontrarCaixaPorDono(donoProcurar);
+                    if (posicaoCaixa != -1) {
+                        Caixa caixaEncontrada = deposito.caixas.get(posicaoCaixa);
+                        JOptionPane.showMessageDialog(null, "Caixa encontrada:\n" + caixaEncontrada.toString(), "Resultado da Pesquisa", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Caixa não encontrada.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    }
+                    break;
+
+                case 4:
+                    // Mudar Caixa
+                    String donoMudar = JOptionPane.showInputDialog("Digite o nome do dono da caixa que deseja mudar:");
+                    String novoCorredor = JOptionPane.showInputDialog("Digite o novo corredor:");
+                    int novaPosicao = Integer.parseInt(JOptionPane.showInputDialog("Digite a nova posição:"));
+
+                    boolean alterado = deposito.mudarCorredorPosicaoPorDono(donoMudar, novoCorredor, novaPosicao);
+                    if (alterado) {
+                        JOptionPane.showMessageDialog(null, "Caixa alterada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Caixa não encontrada para alteração.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    }
+                    break;
+
+                case 5:
+                    // Listar caixas mais pesadas que 10.0kg
+                    Caixa[] caixasPesadas = deposito.caixasComPesoMaiorQue(10.0);
+                    if (caixasPesadas.length > 0) {
+                        StringBuilder sb = new StringBuilder("Caixas mais pesadas que 10.0kg:\n");
+                        for (Caixa caixa : caixasPesadas) {
+                            sb.append(caixa.toString()).append("\n");
+                        }
+                        JOptionPane.showMessageDialog(null, sb.toString(), "Caixas Pesadas", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Nenhuma caixa com peso superior a 10.0kg foi encontrada.", "Resultado", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    break;
+
+                case 6:
+                    // Sair do sistema
+                    JOptionPane.showMessageDialog(null, "Saindo do sistema...", "Sair", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+
+                default:
+                    // Caso a opção não seja válida
+                    JOptionPane.showMessageDialog(null, "Opção inválida! Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+}

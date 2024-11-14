@@ -1,0 +1,95 @@
+import java.util.ArrayList;
+
+public class BancoDeClientes {
+    // Atributo que armazena a lista de clientes
+    private ArrayList<Cliente> clientes;
+
+    // Construtor que inicializa a lista de clientes
+    public BancoDeClientes() {
+        this.clientes = new ArrayList<>();
+    }
+
+    // Método para inserir um cliente na lista
+    public void inserirCliente(Cliente cliente) {
+        clientes.add(cliente);
+    }
+
+    // Método para remover um cliente da lista pelo ID
+    public boolean removerClientePorId(int id) {
+        for (Cliente cliente : clientes) {
+            if (cliente.getId() == id) {
+                clientes.remove(cliente);
+                return true; // Cliente removido com sucesso
+            }
+        }
+        return false; // Cliente não encontrado
+    }
+
+    // Método para alterar os dados de um cliente pelo ID
+    public boolean alterarCliente(int id, String novoNome, String novoFone) {
+        for (Cliente cliente : clientes) {
+            if (cliente.getId() == id) {
+                cliente.setNome(novoNome);
+                cliente.setFone(novoFone);
+                return true; // Dados alterados com sucesso
+            }
+        }
+        return false; // Cliente não encontrado
+    }
+
+    // Método para listar os dados de um cliente pelo ID
+    public void listarClientePorId(int id) {
+        for (Cliente cliente : clientes) {
+            if (cliente.getId() == id) {
+                System.out.println(cliente); // Exibe os dados do cliente
+                return;
+            }
+        }
+        System.out.println("Cliente não encontrado.");
+    }
+
+    // Método para listar todos os clientes
+    public void listarTodosClientes() {
+        if (clientes.isEmpty()) {
+            System.out.println("Nenhum cliente cadastrado.");
+        } else {
+            for (Cliente cliente : clientes) {
+                System.out.println(cliente); // Exibe os dados de cada cliente
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        // Testando a classe BancoDeClientes
+        BancoDeClientes banco = new BancoDeClientes();
+
+        // Criando e inserindo clientes
+        banco.inserirCliente(new Cliente("João Silva", "1234-5678", 1));
+        banco.inserirCliente(new Cliente("Maria Souza", "9876-5432", 2));
+        banco.inserirCliente(new Cliente("Carlos Pereira", "1122-3344", 3));
+
+        // Listando todos os clientes
+        System.out.println("Todos os clientes cadastrados:");
+        banco.listarTodosClientes();
+
+        // Alterando um cliente
+        System.out.println("\nAlterando o cliente com ID 2:");
+        banco.alterarCliente(2, "Maria Oliveira", "9999-8888");
+
+        // Listando o cliente com ID 2 após alteração
+        banco.listarClientePorId(2);
+
+        // Removendo um cliente
+        System.out.println("\nRemovendo o cliente com ID 3:");
+        boolean removido = banco.removerClientePorId(3);
+        if (removido) {
+            System.out.println("Cliente removido com sucesso.");
+        } else {
+            System.out.println("Cliente não encontrado.");
+        }
+
+        // Listando todos os clientes após a remoção
+        System.out.println("\nTodos os clientes após remoção:");
+        banco.listarTodosClientes();
+    }
+}

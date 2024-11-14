@@ -1,0 +1,84 @@
+import javax.swing.*;
+import java.util.ArrayList;
+
+public class CadastroApp {
+    public static void main(String[] args) {
+        // Criação do BancoDeClientes
+        BancoDeClientes banco = new BancoDeClientes();
+
+        // Variável para armazenar a opção escolhida no menu
+        int opcao = 0;
+
+        // Loop para exibir o menu enquanto o usuário não escolher a opção de sair
+        while (opcao != 6) {
+            // Exibindo o menu com as opções
+            String menu = "1. Inserir Cliente\n" +
+                          "2. Remover Cliente\n" +
+                          "3. Alterar Cliente\n" +
+                          "4. Listar Dados de um Cliente\n" +
+                          "5. Listar Todos os Clientes\n" +
+                          "6. Sair";
+            opcao = Integer.parseInt(JOptionPane.showInputDialog(null, menu, "Menu de Cadastro de Clientes", JOptionPane.INFORMATION_MESSAGE));
+
+            switch (opcao) {
+                case 1:
+                    // Inserir Cliente
+                    String nome = JOptionPane.showInputDialog("Digite o nome do cliente:");
+                    String fone = JOptionPane.showInputDialog("Digite o telefone do cliente:");
+                    int id = Integer.parseInt(JOptionPane.showInputDialog("Digite o ID do cliente:"));
+
+                    // Criação do novo cliente e inserção no banco
+                    Cliente novoCliente = new Cliente(nome, fone, id);
+                    banco.inserirCliente(novoCliente);
+                    JOptionPane.showMessageDialog(null, "Cliente inserido com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+
+                case 2:
+                    // Remover Cliente
+                    int idRemover = Integer.parseInt(JOptionPane.showInputDialog("Digite o ID do cliente a ser removido:"));
+                    boolean removido = banco.removerClientePorId(idRemover);
+                    if (removido) {
+                        JOptionPane.showMessageDialog(null, "Cliente removido com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Cliente não encontrado.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    }
+                    break;
+
+                case 3:
+                    // Alterar Cliente
+                    int idAlterar = Integer.parseInt(JOptionPane.showInputDialog("Digite o ID do cliente a ser alterado:"));
+                    String novoNome = JOptionPane.showInputDialog("Digite o novo nome do cliente:");
+                    String novoFone = JOptionPane.showInputDialog("Digite o novo telefone do cliente:");
+
+                    boolean alterado = banco.alterarCliente(idAlterar, novoNome, novoFone);
+                    if (alterado) {
+                        JOptionPane.showMessageDialog(null, "Dados do cliente alterados com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Cliente não encontrado.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    }
+                    break;
+
+                case 4:
+                    // Listar Dados de um Cliente
+                    int idListar = Integer.parseInt(JOptionPane.showInputDialog("Digite o ID do cliente para listar seus dados:"));
+                    banco.listarClientePorId(idListar);
+                    break;
+
+                case 5:
+                    // Listar Todos os Clientes
+                    StringBuilder todosClientes = new StringBuilder();
+                    banco.listarTodosClientes();
+                    break;
+
+                case 6:
+                    // Sair
+                    JOptionPane.showMessageDialog(null, "Saindo do sistema...", "Sair", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+
+                default:
+                    // Caso a opção não seja válida
+                    JOptionPane.showMessageDialog(null, "Opção inválida! Tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+}

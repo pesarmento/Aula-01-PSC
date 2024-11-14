@@ -1,0 +1,72 @@
+import java.util.ArrayList;
+
+public class Deposito {
+    // Atributo que armazena as caixas no depósito
+    private ArrayList<Caixa> caixas;
+
+    // Construtor que inicializa o ArrayList de caixas
+    public Deposito() {
+        this.caixas = new ArrayList<>();
+    }
+
+    // Método para adicionar uma caixa ao depósito
+    public void adicionarCaixa(Caixa caixa) {
+        caixas.add(caixa);
+    }
+
+    // Método para remover uma caixa do depósito pelo nome do dono
+    public boolean removerCaixaPorDono(String dono) {
+        for (int i = 0; i < caixas.size(); i++) {
+            if (caixas.get(i).getDono().equals(dono)) {
+                caixas.remove(i);
+                return true;
+            }
+        }
+        return false; // Se a caixa com o dono especificado não for encontrada
+    }
+
+    // Método para encontrar a posição de uma caixa pelo dono
+    public int encontrarCaixaPorDono(String dono) {
+        for (int i = 0; i < caixas.size(); i++) {
+            if (caixas.get(i).getDono().equals(dono)) {
+                return i; // Retorna a posição da caixa
+            }
+        }
+        return -1; // Retorna -1 se a caixa não for encontrada
+    }
+
+    // Método para alterar o corredor e a posição de uma caixa pelo dono
+    public boolean mudarCorredorPosicaoPorDono(String dono, String novoCorredor, int novaPosicao) {
+        int index = encontrarCaixaPorDono(dono);
+        if (index != -1) {
+            Caixa caixa = caixas.get(index);
+            caixa.setCorredor(novoCorredor);
+            caixa.setPosicao(novaPosicao);
+            return true;
+        }
+        return false; // Retorna false se a caixa não for encontrada
+    }
+
+    // Método para retornar um vetor com as caixas que pesam mais que um valor passado
+    public Caixa[] caixasComPesoMaiorQue(double pesoMinimo) {
+        ArrayList<Caixa> caixasPesadas = new ArrayList<>();
+        for (Caixa caixa : caixas) {
+            if (caixa.getPeso() > pesoMinimo) {
+                caixasPesadas.add(caixa);
+            }
+        }
+        return caixasPesadas.toArray(new Caixa[0]); // Retorna um vetor de caixas
+    }
+
+    // Método para exibir todas as caixas do depósito
+    public void exibirCaixas() {
+        if (caixas.isEmpty()) {
+            System.out.println("Não há caixas no depósito.");
+        } else {
+            for (Caixa caixa : caixas) {
+                caixa.exibirInformacoes();
+            }
+        }
+    }
+
+    public static 
